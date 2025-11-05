@@ -10,4 +10,24 @@ class MuseoDAO:
     def __init__(self):
         pass
 
-    # TODO
+
+    def get_all_museums(self):
+        conn = ConnessioneDB.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM museo ORDER BY nome"
+        cursor.execute(query)
+
+        righe = cursor.fetchall()
+        musei = [] #lista vuota dove accumuliamo gli oggetti Museo
+
+        for riga in righe:
+            museo = Museo(riga['id'],
+                          riga['nome'],
+                          riga['tipologia'])  #crea oggetto museo con valori della riga
+            #si sarebbe anche potuto scrivere --> Museo(**riga) per una flessibilità più alta
+
+            musei.append(museo)
+
+        cursor.close()
+        conn.close()
+        return musei
