@@ -17,17 +17,17 @@ class Controller:
         self.museo_selezionato = None
         self.epoca_selezionata = None
 
-        # Popola i dropdown
+        # POPOLA DROPDOWN
         self.popola_dropdown()
 
         # Imposta le callback
-        self._view.dropdown_musei.on_change = self.callback_museo
-        self._view.dropdown_epoche.on_change = self.callback_epoca
+        self._view.dropdown_musei.on_click = self.callback_museo
+        self._view.dropdown_epoche.on_click = self.callback_epoca
 
         # Imposta l'azione del bottone
         self._view.btn_mostra_artefatti.on_click = self.mostra_artefatti
 
-    # --- POPOLAMENTO DROPDOWN ---
+    #POPOLA DROPDOWN
     def popola_dropdown(self):
         musei = self._model.get_musei()
         epoche = self._model.get_epoche()
@@ -40,14 +40,18 @@ class Controller:
 
         self._view.update()
 
-    # --- CALLBACKS ---
+    #CALLBACKS DROPDOWN
     def callback_museo(self, e):
+        # e. control = oggetto grafico (DropDown) che genera l'evento in questo caso la selezione di un museo
+        #e.control.value = valore selezionato dall'utente
         self.museo_selezionato = e.control.value
+        #self.mostra_artefatti(e) --> in questo modo non dovrei schiacciare il bottone 'Mostra artefatti'
 
     def callback_epoca(self, e):
         self.epoca_selezionata = e.control.value
+        #self.mostra_artefatti(e) --> in questo modo non dovrei schiacciare il bottone 'Mostra artefatti'
 
-    # --- AZIONE: MOSTRA ARTEFATTI ---
+    #AZIONE: MOSTRA ARTEFATTI
     def mostra_artefatti(self, e):
         museo = self.museo_selezionato or "Nessun filtro"
         epoca = self.epoca_selezionata or "Nessun filtro"

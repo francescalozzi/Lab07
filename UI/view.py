@@ -42,13 +42,24 @@ class View:
         self.dropdown_epoche = ft.Dropdown(label="Epoca", width=200)
         self.btn_mostra_artefatti = ft.ElevatedButton(text="Mostra Artefatti")
 
-        self.filtri_row = ft.Row(
-            controls=[self.dropdown_musei, self.dropdown_epoche, self.btn_mostra_artefatti],
+        self.filtri_col = ft.Column(
+            controls=[
+                ft.Row(controls= [self.dropdown_musei, self.dropdown_epoche],
+                        alignment="center",
+                        spacing=20
+                ),
+                ft.Row(controls= [self.btn_mostra_artefatti],
+                       alignment="center"
+                       )
+                ],
             alignment="center",
-        )
+            spacing=10)
+
+
+
 
         # Sezione 3: Lista artefatti
-        self.lista_artefatti = ft.ListView(expand=1, spacing=10, padding=10)
+        self.lista_artefatti = ft.ListView(expand=True, spacing=10, padding=10)
 
         # Toggle Tema
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
@@ -58,8 +69,12 @@ class View:
             self.toggle_cambia_tema,
             self.txt_titolo,
             ft.Divider(),
-            self.filtri_row,
+
+            # Sezione 2: Filtraggio
+            self.filtri_col,
             ft.Divider(),
+
+            # Sezione 3: Artefatti
             self.lista_artefatti,
         )
 
