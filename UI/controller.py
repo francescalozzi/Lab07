@@ -21,8 +21,8 @@ class Controller:
         self.popola_dropdown()
 
         # Imposta le callback
-        self._view.dropdown_musei.on_click = self.callback_museo
-        self._view.dropdown_epoche.on_click = self.callback_epoca
+        self._view.dropdown_musei.on_change = self.callback_museo
+        self._view.dropdown_epoche.on_change = self.callback_epoca
 
         # Imposta l'azione del bottone
         self._view.btn_mostra_artefatti.on_click = self.mostra_artefatti

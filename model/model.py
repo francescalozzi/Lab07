@@ -21,19 +21,19 @@ class Model:
 
         #se utente sceglie 'Nessun filtro' o non seleziona nulla?
 
-        if museo == 'Nessun filtro':
+        if museo == 'Nessun filtro' or museo is None:
             id_museo = None
         else :
             #cerchiamo id del museo corrispondente a nome selzionato
             #next() = restituisce il primo elemento del generatore che soddisfa la condizione
             #con secondo argomento None se non trova nulla restituisce None
 
-            id_museo = next((mus.id for mus in musei if mus == museo), None)
+            id_museo = next((mus.id for mus in musei if mus.nome == museo), None)
 
-        if epoca == 'Nessun filtro':
+        if epoca == 'Nessun filtro' or epoca is None:
             epoca = None
         else:
-            epoca = epoca.strip()
+            epoca = epoca.strip().lower()
 
 
         #viene interrogato il DAO e viene restituita la lista di oggetti Artefatto
